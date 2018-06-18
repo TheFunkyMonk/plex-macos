@@ -7,10 +7,27 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    alwaysOnTop: true,
+    frame: false,
+    width: 720,
+    height: 400
+  })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  // mainWindow.loadFile('index.html')
+  mainWindow.loadURL('https://plex.tv/web');
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.insertCSS(`
+      .nav-bar {
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
+      }
+      .nav-bar a {
+        -webkit-app-region: no-drag;
+      }
+    `);
+  });
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

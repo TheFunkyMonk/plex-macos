@@ -1,0 +1,24 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "package": "$(npm bin)/electron-packager . Plex --platform=darwin --arch=x64 --icon=./public/plex.icns --app-version=0.1.0 --app-bundle-id=no.rjlacount.plex --helper-bundle-id=no.rjlacount.plex.helper --out ./dist --overwrite",
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^2.0.0",
+    "electron-packager": "^8.7.1"
+  }
+}
