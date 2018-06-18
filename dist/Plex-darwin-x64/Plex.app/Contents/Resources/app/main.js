@@ -1,9 +1,105 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
+let mainWindow;
+
+const menuTemplate = [{
+  label: 'Plex',
+  submenu: [{
+    label: 'About Plex',
+    role: 'about',
+  }, {
+    type: 'separator',
+  }, {
+    label: 'Hide Plex',
+    accelerator: 'Command+H',
+    role: 'hide',
+  }, {
+    label: 'Quit Plex',
+    accelerator: 'Command+Q',
+    role: 'quit',
+  }],
+}, {
+  label: 'View',
+  submenu: [{
+    label: 'Reload',
+    accelerator: 'Command+R',
+    click: (menuItem, mainWindow) => {
+      if (mainWindow) {
+        mainWindow.reload();
+      }
+    },
+  }],
+}, {
+  label: 'Window',
+  submenu: [{
+    label: 'Zoom',
+    role: 'zoom',
+  }, {
+    label: 'Minimize',
+    accelerator: 'Command+M',
+    role: 'minimize',
+  }, {
+    type: 'separator',
+  }, {
+    label: 'Float on Top',
+    accelerator: 'Command+T',
+    type: 'checkbox',
+    checked: true,
+    click: (menuItem, mainWindow) => {
+      const isChecked = !menuItem.checked;
+
+      mainWindow.setAlwaysOnTop(!isChecked);
+    },
+  }, {
+    type: 'separator',
+  }, {
+    label: '720 x 400 (16:9)',
+    click: (menuItem, mainWindow) => {
+      const isChecked = !menuItem.checked;
+
+      mainWindow.setSize(720, 400, true);
+    },
+  }, {
+    label: '1280 x 720 (16:9)',
+    click: (menuItem, mainWindow) => {
+      const isChecked = !menuItem.checked;
+
+      mainWindow.setSize(1280, 720, true);
+    },
+  }, {
+    label: '1920 x 1080 (16:9)',
+    click: (menuItem, mainWindow) => {
+      const isChecked = !menuItem.checked;
+
+      mainWindow.setSize(1920, 1080, true);
+    },
+  }, {
+    label: '800 x 600 (4:3)',
+    click: (menuItem, mainWindow) => {
+      const isChecked = !menuItem.checked;
+
+      mainWindow.setSize(800, 600, true);
+    },
+  }, {
+    label: '1024 x 768 (4:3)',
+    click: (menuItem, mainWindow) => {
+      const isChecked = !menuItem.checked;
+
+      mainWindow.setSize(1024, 768, true);
+    },
+  }, {
+    type: 'separator',
+  }, {
+    label: 'Show Inspector',
+    accelerator: 'Command+Alt+I',
+    click: (menuItem, mainWindow) => {
+      mainWindow.webContents.openDevTools();
+    },
+  }],
+}];
 
 function createWindow () {
   // Create the browser window.
@@ -13,6 +109,7 @@ function createWindow () {
     width: 720,
     height: 400
   })
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
   // and load the index.html of the app.
   // mainWindow.loadFile('index.html')
@@ -59,7 +156,7 @@ app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
 })
 
