@@ -14,18 +14,18 @@ const menuTemplate = [{
     type: 'separator',
   }, {
     label: 'Hide Plex',
-    accelerator: 'Command+H',
+    accelerator: 'CmdOrCtrl+H',
     role: 'hide',
   }, {
     label: 'Quit Plex',
-    accelerator: 'Command+Q',
+    accelerator: 'CmdOrCtrl+Q',
     role: 'quit',
   }],
 }, {
   label: 'View',
   submenu: [{
     label: 'Reload',
-    accelerator: 'Command+R',
+    accelerator: 'CmdOrCtrl+R',
     click: (menuItem, mainWindow) => {
       if (mainWindow) {
         mainWindow.reload();
@@ -39,13 +39,13 @@ const menuTemplate = [{
     role: 'zoom',
   }, {
     label: 'Minimize',
-    accelerator: 'Command+M',
+    accelerator: 'CmdOrCtrl+M',
     role: 'minimize',
   }, {
     type: 'separator',
   }, {
     label: 'Float on Top',
-    accelerator: 'Command+T',
+    accelerator: 'CmdOrCtrl+T',
     type: 'checkbox',
     checked: true,
     click: (menuItem, mainWindow) => {
@@ -57,6 +57,7 @@ const menuTemplate = [{
     type: 'separator',
   }, {
     label: '720 x 400 (16:9)',
+    accelerator: 'CmdOrCtrl+1',
     click: (menuItem, mainWindow) => {
       const isChecked = !menuItem.checked;
 
@@ -64,6 +65,7 @@ const menuTemplate = [{
     },
   }, {
     label: '1280 x 720 (16:9)',
+    accelerator: 'CmdOrCtrl+2',
     click: (menuItem, mainWindow) => {
       const isChecked = !menuItem.checked;
 
@@ -71,6 +73,7 @@ const menuTemplate = [{
     },
   }, {
     label: '1920 x 1080 (16:9)',
+    accelerator: 'CmdOrCtrl+3',
     click: (menuItem, mainWindow) => {
       const isChecked = !menuItem.checked;
 
